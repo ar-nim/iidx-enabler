@@ -1,4 +1,4 @@
 iidx-enabler
 ============
 
-Easily Hex Edit your beatmaniaIIDX DLL to enable certain features.
+Easily Hex Edit your beatmaniaIIDX 22 PENDUAL DLL to enable certain hacks and features.
