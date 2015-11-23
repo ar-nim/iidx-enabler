@@ -1,7 +1,21 @@
-/**
- * Unittest.c - Simple unittest of pendual.
+/*
+ * This file is part of Pendual Enabler.
  *
- * Author: Contrixed
+ * Copyright (C) 2015  kclkcl
+ * Copyright (C) 2015  contrixed
+ *
+ * Pendual Enabler is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * any later version.
+ *
+ * Pendual Enabler is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Pendual Enabler.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <stdio.h>
 #include <stdint.h>
@@ -108,8 +122,6 @@ static const uint32_t hexcheck32(const int address)
 static void test_value_timer_freeze(void)
 {
     uint8_t value = hexcheck8(0x9C55E);
-    printf(" I was called.\n");
-    printf("Value %d\n", value);
 
     if (value == 0x74)
     {
@@ -164,7 +176,6 @@ static void test_value_premium_free(void)
 static void test_value_premium_timer_freeze(void)
 {
     uint8_t value = hexcheck8(0x563AD);
-    printf("Value of ptf: %d", value);
 
     if (value == 0x48)
     {
@@ -178,8 +189,6 @@ static void test_value_premium_timer_freeze(void)
 static void test_value_remove_free_play_text(void)
 {
     uint32_t value = hexcheck32(0x14C3A);
-    printf("Value after shift: %d", value);
-    printf("value of 1210 %d", 0x1012);
 
     if (value == 0x1012)
     {
@@ -234,7 +243,6 @@ static void test_value_cs_style_select(void)
 static void test_value_dark_mode(void)
 {
     uint16_t value = hexcheck16(0x71182);
-    printf("value of dark mode: %d", value);
 
     if (value == 0x32)
     {

@@ -1,8 +1,26 @@
+/*
+ * This file is part of Pendual Enabler.
+ *
+ * Copyright (C) 2015  kclkcl
+ * Copyright (C) 2015  contrixed
+ *
+ * Pendual Enabler is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 2 of the License, or
+ * any later version.
+ *
+ * Pendual Enabler is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with Pendual Enabler.  If not, see <http://www.gnu.org/licenses/>.
+ */
 #include "inc/pendual.h"
 
 static const char *get_flag(uint8_t flag)
 {
-    printf("FLAG to string: %s\n", OF[flag]);
     return OF[flag];
 }
 
@@ -38,15 +56,10 @@ static const uint32_t hexcheck32(const int address)
 
 static void toggles(pendual_flags_t *flags)
 {
-    printf("uint8: %d", (uint8_t) 1 << 0);
-
     //Check for Timer Freeze
     if (hexcheck8(0x9C55E) == 0x74)
     {
-        printf("OFF\n");
         flags->timer_freeze = 1 << 0;
-        printf("Value of struct. %d\n", flags->timer_freeze);
-        printf("OF %s\n", OF[1]);
     }
 
     //Check for All Song Unlock
@@ -102,8 +115,6 @@ static void toggles(pendual_flags_t *flags)
     {
         flags->darkmode = 1 << 0;
     }
-
-    //free(flags);
 }
 
 static void help(void)
