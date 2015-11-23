@@ -21,7 +21,6 @@ To compile the main program run
 
 To compile the unittest run the following
 
-`make fakedll`
 `make unittest`
 
 On Windows:
