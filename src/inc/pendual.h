@@ -1,5 +1,3 @@
-
-
 #include <stdio.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -7,6 +5,13 @@
 
 #ifndef PENDUAL_H
 #define PENDUAL_H
+
+/* Make Windows use printf_s. */
+#ifdef _WIN32
+#ifdef SECURE_CRT
+#define printf printf_s
+#endif
+#endif
 
 FILE *fp;
 static int selection;
