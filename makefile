@@ -26,7 +26,7 @@ TARGET = pendual
 TARGET_UNITTEST = punittest
 SRC_UNITTEST = unittest.c
 SRC = $(wildcard src/*.c)
-HEADERS = $(wildcard src/include/*.h)
+HEADERS = $(wildcard src/inc/*.h)
 OBJECTS = $(SRC:.o=.c)
 
 all: $(TARGET)
