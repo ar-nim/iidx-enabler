@@ -12,8 +12,18 @@ Usage
 6. Have an enjoying.
 
 Compiling
-============
-Dependencies: GCC / Visual C++ (untested)
+==
+On Linux:
 
-Compiling with GCC:
-gcc main.c -o Pendual-Enabler.exe
+To compile the main program run
+
+`make`
+
+To compile the unittest run the following
+
+`make fakedll`
+`make unittest`
+
+On Windows:
+
+This is still untested.
