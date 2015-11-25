@@ -26,3 +26,9 @@ To compile the unittest run the following
 On Windows:
 
 This is still untested.
+
+Compiler Support
+==
+Pendual can be compiled via GCC and Clang.
+
+On Windows presumably Microsoft's Visual C++ compiler or MinGW.
