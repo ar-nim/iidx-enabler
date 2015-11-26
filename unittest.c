@@ -62,7 +62,7 @@ static inline void assert_equals8(uint8_t a, uint8_t b, const char *func)
  * @param[in] b The value to compare to a.
  * @param[in] func The test function name.
  */
-static void assert_equals16(uint16_t a, uint16_t b, const char *func)
+static inline void assert_equals16(uint16_t a, uint16_t b, const char *func)
 {
     if (a == b)
     {
@@ -86,7 +86,7 @@ static void assert_equals16(uint16_t a, uint16_t b, const char *func)
  * @param[in] b The value to compare to b.
  * @param[in] func The test function name.
  */
-static void assert_equals32(uint32_t a, uint32_t b, const char *func)
+static inline void assert_equals32(uint32_t a, uint32_t b, const char *func)
 {
     if (a == b)
     {
