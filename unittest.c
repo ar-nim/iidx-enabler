@@ -31,7 +31,14 @@ static int fail_count = 0;
 static int success_count = 0;
 FILE *fp;
 
-static void assert_equals8(uint8_t a, uint8_t b, const char *func)
+/**
+ * Assert that two unsigned 8 bit integers are equal.
+ * 
+ * @param[in] a The value to compare to b.
+ * @param[in] b The value to compare to a.
+ * @param[in] func The test function name.
+ */
+static inline void assert_equals8(uint8_t a, uint8_t b, const char *func)
 {
     if (a == b)
     {
@@ -48,6 +55,13 @@ static void assert_equals8(uint8_t a, uint8_t b, const char *func)
     }
 }
 
+/**
+ * Assert that two unsigned 16 bit integers are equal.
+ * 
+ * @param[in] a The value to compare to b.
+ * @param[in] b The value to compare to a.
+ * @param[in] func The test function name.
+ */
 static void assert_equals16(uint16_t a, uint16_t b, const char *func)
 {
     if (a == b)
@@ -65,6 +79,13 @@ static void assert_equals16(uint16_t a, uint16_t b, const char *func)
     }
 }
 
+/**
+ * Assert that two unsigned 32 bit integers are equal.
+ * 
+ * @param[in] a The value to compare to a.
+ * @param[in] b The value to compare to b.
+ * @param[in] func The test function name.
+ */
 static void assert_equals32(uint32_t a, uint32_t b, const char *func)
 {
     if (a == b)
@@ -82,12 +103,24 @@ static void assert_equals32(uint32_t a, uint32_t b, const char *func)
     }
 }
 
+/**
+ * Modify the hexadecimal value at the specified address.
+ * 
+ * @param[in] address The address to modify.
+ * @param[in] value The new value for the address.
+ */
 static void hexedit(const int address, const uint8_t value)
 {
     fseek(fp, address, SEEK_SET);
     fwrite(&value, sizeof(char), 1, fp);
 }
 
+/**
+ * Read a single byte from the file as an 8 bit integer.
+ * 
+ * @param[in] The address to read from.
+ * @return The value that was read from the file.
+ */
 static const uint8_t hexcheck8(const int address)
 {
     uint8_t value;
@@ -97,10 +130,10 @@ static const uint8_t hexcheck8(const int address)
 }
 
 /**
- * Obtain two bytes and represent them as a 16 bit unsigned integer.
+ * Read two bytes from the file as an 16 bit integer.
  *
- * @param[in] int address The offset of the location to obtain.
- * @return The value shifted right by 8.
+ * @param[in] address The address to read from.
+ * @return The value that was read from the file right shifted by eight.
  */
 static const uint16_t hexcheck16(const int address)
 {
@@ -110,6 +143,12 @@ static const uint16_t hexcheck16(const int address)
     return value >> 8;
 }
 
+/**
+ * Read four bytes from the file as a 32 bit integer.
+ * 
+ * @param[in] address The address to read from.
+ * @return The value that was read from the file right shifted by sixteen.
+ */
 static const uint32_t hexcheck32(const int address)
 {
     uint32_t value;
@@ -253,7 +292,9 @@ static void test_value_dark_mode(void)
     assert_equals16(value, 0x01, "test_value_dark_mode [modified value]");
 }
 
-
+/**
+ * Write the changes to the fake dll.
+ */
 static void write_changes(void)
 {
     /* time freeze */
@@ -284,37 +325,43 @@ static void write_changes(void)
     hexedit(0xD5D09, 0x01);
 }
 
+/**
+ * Reset the changes made to the fake dll.
+ */
 static void reset_changes(void)
 {
-  // 1
-  hexedit(0x9C55E, 0x74);
-  // 2
-  hexedit(0x58B3E, 0x75);
-  hexedit(0x58B3F, 0x0A);
-  // 3
-  hexedit(0x77CF6, 0x7C);
-  // 4
-  hexedit(0x6BF3A, 0x74);
-  hexedit(0x6BF3B, 0x23);
-  // 5
-  hexedit(0x5D31B, 0x75);
-  // 6
-  hexedit(0x563AD, 0x48);
-  // 7
-  hexedit(0x14C3A, 0x90);
-  hexedit(0x14C3B, 0x3f);
-  hexedit(0x14C3C, 0x12);
-  hexedit(0x14C3D, 0x10);
-  // 8
-  hexedit(0x14C3A, 0x90);
-  hexedit(0x14C3B, 0x3f);
-  hexedit(0x14C3C, 0x12);
-  hexedit(0x14C3D, 0x10);
-  // 9 / 10
-  hexedit(0xD5D09, 0xEB + '\0');
+    // 1
+    hexedit(0x9C55E, 0x74);
+    // 2
+    hexedit(0x58B3E, 0x75);
+    hexedit(0x58B3F, 0x0A);
+    // 3
+    hexedit(0x77CF6, 0x7C);
+    // 4
+    hexedit(0x6BF3A, 0x74);
+    hexedit(0x6BF3B, 0x23);
+    // 5
+    hexedit(0x5D31B, 0x75);
+    // 6
+    hexedit(0x563AD, 0x48);
+    // 7
+    hexedit(0x14C3A, 0x90);
+    hexedit(0x14C3B, 0x3f);
+    hexedit(0x14C3C, 0x12);
+    hexedit(0x14C3D, 0x10);
+    // 8
+    hexedit(0x14C3A, 0x90);
+    hexedit(0x14C3B, 0x3f);
+    hexedit(0x14C3C, 0x12);
+    hexedit(0x14C3D, 0x10);
+    // 9 / 10
+    hexedit(0xD5D09, 0xEB + '\0');
 }
 
-int main(int argc, char *argv[])
+/**
+ * Entry point.
+ */
+int main(void)
 {
     fp = fopen("fake.bm2x.dll", "r+b");
 
@@ -342,7 +389,7 @@ int main(int argc, char *argv[])
 
     printf("\n");
     printf("Writing changes to fake.bm2x.dll.\n");
-    printf("Test will resume momentarily\n");
+    printf("Test will resume momentarily.\n");
     write_changes();
 
     printf("Testing modified values.\n");
