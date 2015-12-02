@@ -18,13 +18,22 @@
  * along with Pendual Enabler.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <stdio.h>
+
+#ifndef _WIN32
 #include <stdint.h>
+#endif
 
 /* Make Windows use printf_s. */
 #ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
 #ifdef SECURE_CRT
 #define printf printf_s
 #endif
+#define inline __inline
+typedef BYTE uint8_t;
+typedef DWORD uint16_t;
+typedef UINT32 uint32_t;
 #endif
 
 static int fail_count = 0;
@@ -33,7 +42,7 @@ FILE *fp;
 
 /**
  * Assert that two unsigned 8 bit integers are equal.
- * 
+ *
  * @param[in] a The value to compare to b.
  * @param[in] b The value to compare to a.
  * @param[in] func The test function name.
@@ -57,7 +66,7 @@ static inline void assert_equals8(uint8_t a, uint8_t b, const char *func)
 
 /**
  * Assert that two unsigned 16 bit integers are equal.
- * 
+ *
  * @param[in] a The value to compare to b.
  * @param[in] b The value to compare to a.
  * @param[in] func The test function name.
@@ -81,7 +90,7 @@ static inline void assert_equals16(uint16_t a, uint16_t b, const char *func)
 
 /**
  * Assert that two unsigned 32 bit integers are equal.
- * 
+ *
  * @param[in] a The value to compare to a.
  * @param[in] b The value to compare to b.
  * @param[in] func The test function name.
@@ -105,7 +114,7 @@ static inline void assert_equals32(uint32_t a, uint32_t b, const char *func)
 
 /**
  * Modify the hexadecimal value at the specified address.
- * 
+ *
  * @param[in] address The address to modify.
  * @param[in] value The new value for the address.
  */
@@ -117,7 +126,7 @@ static void hexedit(const int address, const uint8_t value)
 
 /**
  * Read a single byte from the file as an 8 bit integer.
- * 
+ *
  * @param[in] The address to read from.
  * @return The value that was read from the file.
  */
@@ -145,7 +154,7 @@ static const uint16_t hexcheck16(const int address)
 
 /**
  * Read four bytes from the file as a 32 bit integer.
- * 
+ *
  * @param[in] address The address to read from.
  * @return The value that was read from the file right shifted by sixteen.
  */
@@ -257,12 +266,12 @@ static void test_value_leave_system_volume_alone(void)
 
     if (value == 0x00)
     {
-        assert_equals8(value, 0x00, "test_value_leave_system_volume_alone [normal value]");
+        assert_equals16(value, 0x00, "test_value_leave_system_volume_alone [normal value]");
         return;
     }
 
     printf("Value of system volume: %d\n", value);
-    assert_equals8(value, 0x01, "test_value_leave_system_volume_alone [modified value]");
+    assert_equals16(value, 0x01, "test_value_leave_system_volume_alone [modified value]");
 }
 
 static void test_value_cs_style_select(void)
@@ -363,13 +372,29 @@ static void reset_changes(void)
  */
 int main(void)
 {
-    fp = fopen("fake.bm2x.dll", "r+b");
+#ifdef _WIN32
+        errno_t err;
+#endif
 
+#ifdef _WIN32
+    err = fopen_s(&fp, "fake.bm2x.dll", "r+b");
+#else
+    fp = fopen("fake.bm2x.dll", "r+b");
+#endif
+
+#ifdef _WIN32
     if (fp == NULL)
     {
         printf("File failed to open.\n");
         return 1;
     }
+#else
+    if (err == 0)
+    {
+        printf("File failed to open.\n");
+        return 1;
+    }
+#endif
 
     printf("Unittest for Pendual.\n");
     printf("Written by: contrixed.\n");

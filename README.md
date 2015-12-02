@@ -15,20 +15,20 @@ Compiling
 ==
 On Linux:
 
-To compile the main program run
+To compile the main program run.
 
 `make`
 
-To compile the unittest run the following
+To compile the unittest run the following.
 
 `make unittest`
 
 On Windows:
 
-This is still untested.
+Use the included Visual Studios project files.
 
 Compiler Support
 ==
 Pendual can be compiled via GCC and Clang.
 
-On Windows presumably Microsoft's Visual C++ compiler or MinGW.
+On Windows Microsoft's Visual C++ compiler or MinGW.

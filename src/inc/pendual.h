@@ -18,20 +18,25 @@
  * along with Pendual Enabler.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <stdio.h>
-#include <stdint.h>
-#include <stdlib.h>
-#include <string.h>
-
 #ifndef PENDUAL_H
 #define PENDUAL_H
 
-/* Make Windows use printf_s. */
 #ifdef _WIN32
-#ifdef SECURE_CRT
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
 #define printf printf_s
 #endif
+
+#include <stdio.h>
+#ifndef _WIN32
+#include <stdint.h>
+#else
+typedef BYTE uint8_t;
+typedef DWORD uint16_t;
+typedef UINT32 uint32_t;
 #endif
+#include <stdlib.h>
+#include <string.h>
 
 FILE *fp;
 static int selection;
