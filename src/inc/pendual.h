@@ -24,7 +24,9 @@
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
+#ifdef SECURE_CRT
 #define printf printf_s
+#endif
 #endif
 
 #include <stdio.h>
