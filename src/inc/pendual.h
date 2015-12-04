@@ -34,7 +34,7 @@
 #include <stdint.h>
 #else
 typedef BYTE uint8_t;
-typedef DWORD uint16_t;
+typedef WORD uint16_t;
 typedef UINT32 uint32_t;
 #endif
 #include <stdlib.h>
