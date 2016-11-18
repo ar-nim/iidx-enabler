@@ -1,6 +1,6 @@
 iidx-enabler
 ============
-Easily Hex Edit your beatmaniaIIDX PENDUAL DLL to enable certain hacks and features.
+Easily Hex Edit your beatmaniaIIDX COPULA DLL to enable certain hacks and features.
 
 Usage
 ============
