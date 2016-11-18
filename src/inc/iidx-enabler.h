@@ -57,7 +57,7 @@ typedef struct {
     uint8_t remove_play_free;
     uint8_t replace_play_free;
     uint8_t system_volume;
-    uint8_t cs_style_song_select;
+    uint8_t cursor_lock;
     uint8_t darkmode;
 } iidx_flags_t;
 

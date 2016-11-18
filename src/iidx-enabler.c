@@ -334,47 +334,24 @@ static void operations(const int choice, iidx_flags_t *flag)
 
 int main(void)
 {
-#ifdef _WIN32
-        errno_t err;
-#endif
+    iidx_flags_t *flags;
 
-        iidx_flags_t *flags;
-
-#ifdef _WIN32
-    err = fopen_s(&fp, filename, filemode);
-#else
     fp = fopen(filename, filemode);
-#endif
+
 
     flags =  malloc(10);
 
-#ifdef _WIN32
-    if (err == 0)
-    {
-        help();
-    }
-#else
     if (fp == NULL)
     {
         help();
     }
-#endif
     else
     {
         do
         {
-#ifdef _WIN32
-            err = fopen_s(&fp, "bm2dx.dll", "w");
-#else
             fp = fopen(filename, filemode);
-#endif
             header(flags);
-
-#ifdef _WIN32
-            scanf_s("%d", &selection);
-#else
             scanf("%d", &selection);
-#endif
             fflush(stdin);
             operations(selection, flags);
         } while (selection != 0x08);
