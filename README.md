@@ -12,8 +12,23 @@ Usage
 6. Have an enjoying.
 
 Compiling
-============
-Dependencies: GCC / Visual C++ (untested)
+==
+On Linux:
 
-Compiling with GCC:
-gcc main.c -o Pendual-Enabler.exe
+To compile the main program run.
+
+`make`
+
+To compile the unittest run the following.
+
+`make unittest`
+
+On Windows:
+
+Use the included Visual Studios project files.
+
+Compiler Support
+==
+Pendual can be compiled via GCC and Clang.
+
+On Windows Microsoft's Visual C++ compiler or MinGW.
