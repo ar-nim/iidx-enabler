@@ -1,6 +1,6 @@
 iidx-enabler
 ============
-Easily Hex Edit your beatmaniaIIDX DLL to enable certain hacks and features.
+Easily Hex Edit your beatmaniaIIDX PENDUAL DLL to enable certain hacks and features.
 
 Usage
 ============
@@ -25,10 +25,10 @@ To compile the unittest run the following.
 
 On Windows:
 
-Use the included Visual Studios project files.
+Use Cygwin, and the rest is the same as Linux.
 
 Compiler Support
 ==
-Pendual can be compiled via GCC and Clang.
+IIDX Enabler can be compiled via GCC and Clang.
 
-On Windows Microsoft's Visual C++ compiler or MinGW.
+Why no Visual Studio support? Using Visual Studio will result in unneeded dependency that will make the program run less portable.
